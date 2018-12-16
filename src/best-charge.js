@@ -27,7 +27,6 @@ let getItemIdAndQuantity = selectedItems => selectedItems.map(ele => {
 
 let computeTotalPriceWithNoPromotion = sameItemTotalPrice => sameItemTotalPrice.reduce((totalPrice, item) => totalPrice + item.totalPrice, 0);
 
-
 let choosePromotion = (sameItemTotalPrice, totalPriceWithNoPromotion) => {
   const promotions = loadPromotions();
   const moneyOff = computeMoneyOff(totalPriceWithNoPromotion, promotions);
@@ -85,7 +84,6 @@ function printItemsList(sameItemTotalPrice) {
 ============= 订餐明细 =============
 ${itemsList}`;
 }
-
 
 let printPromotionList = promotion => {
   if (promotion.reduceMoney === 0) {
