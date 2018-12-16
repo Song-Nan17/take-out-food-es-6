@@ -19,10 +19,7 @@ let computeSameItemTotalPrice = selectedItems => {
 
 let getItemIdAndQuantity = selectedItems => selectedItems.map(ele => {
   let arr = ele.split(' x ');
-  let obj = {};
-  obj.id = arr[0];
-  obj.quantity = Number(arr[1]);
-  return obj;
+  return { id, quantity } = { id: arr[0], quantity: Number(arr[1]) };
 });
 
 let computeTotalPriceWithNoPromotion = sameItemTotalPrice => sameItemTotalPrice.reduce((totalPrice, item) => totalPrice + item.totalPrice, 0);
@@ -35,19 +32,17 @@ let choosePromotion = (sameItemTotalPrice, totalPriceWithNoPromotion) => {
 }
 
 let computeMoneyOff = (totalPrice, promotions) => {
-  let moneyOff = {};
-  moneyOff.type = promotions[0].type;
-  moneyOff.reduceMoney = 0;
+  let reduceMoney = 0;
   if (totalPrice >= 30) {
-    moneyOff.reduceMoney = 6;
+    reduceMoney = 6;
   }
-  return moneyOff;
+  return { type, reduceMoney } = { type: promotions[0].type, reduceMoney: reduceMoney };
 }
 
 let computeHalfOff = (sameItemTotalPrice, promotions) => {
   let items = [];
   let reduceMoney = 0;
-  let halfOff = sameItemTotalPrice.reduce((acc, item) => {
+  return sameItemTotalPrice.reduce((acc, item) => {
     acc.type = promotions[1].type;
     if (promotions[1].items.includes(item.id)) {
       items.push(item.name);
@@ -57,7 +52,6 @@ let computeHalfOff = (sameItemTotalPrice, promotions) => {
     acc.reduceMoney = reduceMoney;
     return acc;
   }, {});
-  return halfOff;
 }
 
 let comparePromotions = (moneyOff, halfOff) => {
